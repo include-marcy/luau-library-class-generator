@@ -201,7 +201,7 @@ export function activate(context: vscode.ExtensionContext) {
 						let preamble = `-- This file is a part of the ${libname} library. ${libname} is licensed under the terms of the ${licenseName}. For more information, see LICENSE.md${flags}`;
 						preamble = preamble + "\n";
 						if (!preambleIncluded) {
-							preamble = "";
+							preamble = `${flags}`;
 						}
 
 						let typesPathRelativeToScript = "script";
