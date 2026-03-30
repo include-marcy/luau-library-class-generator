@@ -186,22 +186,30 @@ export function activate(context: vscode.ExtensionContext) {
 						let includeOptimize2FFlag = llcgConfig.get("includeOptimize2FFlag");
 		
 						let flags = "";
-						if (includeNativeFFlag || includeNativeFFlag || includeOptimize2FFlag) {
-							flags = flags + "\n\n";
+
+						if (includeStrictFFlag || includeNativeFFlag || includeOptimize2FFlag) {
+							flags += "\n";
 						}
+
 						if (includeStrictFFlag) {
-							flags = flags + "--!strict\n";
+							flags += "--!strict\n";
 						}
 						if (includeNativeFFlag) {
-							flags = flags + "--!native\n";
+							flags += "--!native\n";
 						}
 						if (includeOptimize2FFlag) {
-							flags = flags + "--!optimize 2\n";
+							flags += "--!optimize 2\n";
 						}
+
+						if (flags !== "") {
+							flags += "\n";
+						}
+
 						let preamble = `-- This file is a part of the ${libname} library. ${libname} is licensed under the terms of the ${licenseName}. For more information, see LICENSE.md${flags}`;
-						preamble = preamble + "\n";
+						preamble += "\n";
+
 						if (!preambleIncluded) {
-							preamble = `${flags}`;
+							preamble = flags;
 						}
 
 						let typesPathRelativeToScript = "script";
